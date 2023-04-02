@@ -1,0 +1,16 @@
+/* Enter your custom styles here */
+.header__padding{
+    padding : 0px 2rem;
+}
+
+.blog__header>a.sapMLnk{
+    padding : 20px;
+    color : rgb(54, 54, 54);
+    cursor : pointer;
+}
+
+.blog__header>a.sapMLnk:hover{
+    color : gray;
+    text-decoration : none;
+    text-decoration-line: none;
+}
