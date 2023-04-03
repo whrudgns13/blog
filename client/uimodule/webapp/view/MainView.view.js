@@ -4,9 +4,9 @@ sap.ui.define([], function () {
         getControllerName: function () {
             return "sap.blog.controller.MainView";
         },
-        createContent: function () {
+        createContent: function (oController) {
             this.setDisplayBlock(true);
-            const oCustomHeader =  new sap.m.OverflowToolbar({
+            const oCustomHeader = new sap.m.OverflowToolbar({
                 height : "60px",
                 content : [
                     new sap.m.Image({
@@ -29,11 +29,13 @@ sap.ui.define([], function () {
                     new sap.m.Button({icon : "sap-icon://person-placeholder"})
                 ]
             }).addStyleClass("blog__header header__padding");
-            
+           
             const oPage = new sap.m.Page({
-                customHeader : oCustomHeader,
-                content: []
-            });
+                id : "mainPage",
+                customHeader : oCustomHeader,                
+            }).addStyleClass("blog__page");
+
+            oController.onNavigation("MainContent");
 
             return new sap.m.App(this.createId("idAppControl"), {
                 pages: oPage

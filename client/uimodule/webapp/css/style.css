@@ -4,7 +4,7 @@
 }
 
 .blog__header>a.sapMLnk{
-    padding : 20px;
+    padding : 1rem;
     color : rgb(54, 54, 54);
     cursor : pointer;
 }
@@ -13,4 +13,37 @@
     color : gray;
     text-decoration : none;
     text-decoration-line: none;
+}
+ 
+.blog__page.sapMPage>.sapMPageHeader+section{
+    top: 3.75rem;
+}
+
+.blog__titleBox{
+    padding: 2rem 2rem 1rem 8.3rem;
+    background-color: white;
+}
+
+.blog__page .sapMPanel .sapMPanelContent{
+    padding: 2rem 8.3rem 1rem 8.3rem;
+}
+
+.maincontent a{
+    font-size: 1.2rem;
+}
+
+.maincontent__content{
+    width: 500px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:3;
+    word-break: keep-all; 
+}
+
+.maincontent .maincontent__tags>div:not(:last-child)::after{
+    content: "|";
 }
