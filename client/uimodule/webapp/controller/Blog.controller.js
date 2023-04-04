@@ -6,23 +6,35 @@ sap.ui.define(
     function (Controller) {
         "use strict";
 
-        return Controller.extend("sap.blog.controller.NewPost", {
+        return Controller.extend("sap.blog.controller.Blog", {
             onInit : function(){
                 const oView = this.getView();
                 const oModel = new sap.ui.model.json.JSONModel({
+                    ...oView.getViewData(),
                     sendData : {
-                        title : "",
+                        postId : oView.getViewData().id,
+                        visible : false,
                         value : "",
-                        sender : "",                        
-                        tags : [],                    
-                        //date : ""
+                        sender : ""
                     },
-                    tag : "",  
-                    suggest : [],
+                    comments : []                    
                 });
-
                 oView.setModel(oModel,"ViewModel");
                 this.oViewModel = oView.getModel("ViewModel");
+            },
+            onShowAddComment : function(){
+                this.oViewModel.setProperty("/sendData/visible",!this.oViewModel.getProperty("/sendData/visible"));
+            },
+            onSaveComment : async function(){
+                const response = await fetch("http://localhost:3000/comment",{
+                    method : "POST",
+                    body : JSON.stringify(this.oViewModel.getProperty("/sendData")),
+                    headers : {
+                        "Content-Type" : "application/json"
+                    }
+                });
+
+                if(response.status===200){};
             },
             onPostSubmit : async function(){
                 if(!this.validationCheck()) return;
@@ -46,24 +58,6 @@ sap.ui.define(
 
                 if(response.status===200) this.onNavigation("MainContent");
             },
-            validationCheck : function(){
-                const oSendData = this.oViewModel.getProperty("/sendData");
-                const sTitle = oSendData.title;
-                const sSender = oSendData.sender;
-                let aMessage = [];
-                if(!sTitle) aMessage.push("제목");
-                if(!sSender) aMessage.push("작성자");
-                if(aMessage.length){
-                    new sap.m.MessageToast.show(`${aMessage.join(",")}은 필수입니다.`);
-                    return false;
-                }
-                return true;
-            },
-            onSearchTag : async function(oEvent){
-                const sTag = oEvent.getParameter("value");
-                const aTag = await (await fetch(`http://localhost:3000/searchTag/${sTag}`)).json();
-                this.oViewModel.setProperty("/suggest",aTag);
-            }
         });
     }
 );

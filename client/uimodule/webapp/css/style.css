@@ -24,6 +24,10 @@
     background-color: white;
 }
 
+.blog__titleBox>div.sapMBarChild{
+    width : fit-content;    
+}
+
 .blog__page .sapMPanel .sapMPanelContent{
     padding: 2rem 8.3rem 1rem 8.3rem;
 }
@@ -46,4 +50,23 @@
 
 .maincontent .maincontent__tags>div:not(:last-child)::after{
     content: "|";
+}
+
+.maincontent li[role="listitem"]{
+    background-color: transparent;
+}
+
+.blog__tagTitle{
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+
+.blog__content>div.sapMFlexItem{
+    padding : 5px;
+}
+
+.blog__comment{
+    border-top: 1px solid black;
+    padding-top:2rem;
 }

@@ -9,19 +9,37 @@ sap.ui.define([], function () {
                 height : "auto",
                 content : [
                    new sap.m.VBox({
-                        width : "100%",
                         justifyContent : "Center",
                         items : [
                             new sap.m.VBox({
                                 justifyContent : sap.m.FlexJustifyContent.SpaceBetween,
                                 height : "8rem",
                                 items : [
-                                    new sap.m.Title({
-                                        text : "All Blog Posts",
-                                        titleStyle : sap.ui.core.TitleLevel.H2
-                                    }),
+                                    new sap.m.HBox({
+                                        justifyContent : "SpaceBetween",
+                                        items : [
+                                            new sap.m.Title({
+                                                text : "All Blog Posts",
+                                                titleStyle : sap.ui.core.TitleLevel.H2
+                                            }),
+                                            new sap.m.ComboBox({
+                                                width : "10rem",
+                                                selectedKey : "{ViewModel>/selectedKey}",
+                                                items : {
+                                                    path : "ViewModel>/categorys",
+                                                    template : new sap.ui.core.Item({
+                                                        key : "{ViewModel>key}",
+                                                        text : "{ViewModel>text}",
+                                                    })
+                                                }
+                                            })
+                                        ]
+                                    }),                                    
                                     new sap.m.SearchField({                                       
-                                        width : "40rem"
+                                        width : "40rem",
+                                        search : function(oEvent){
+                                            oController.onPostSearch(oEvent);
+                                        }
                                     }),
                                     new sap.m.Link({
                                         text : "Write a Blog Post",
@@ -54,11 +72,17 @@ sap.ui.define([], function () {
                                             }),
                                             new sap.m.VBox({
                                                 items : [
-                                                    new sap.m.Link({text : "{ViewModel>title}"}),
+                                                    new sap.m.Link({
+                                                        text : "{ViewModel>title}",
+                                                        press : function(oEvent){
+                                                            oController.testfn(oEvent);
+                                                        }
+                                                    }),
                                                     new sap.m.Text({text : "{ViewModel>value}"}).addStyleClass("maincontent__content"),
                                                 ]
                                             }),
                                             new sap.m.HBox({
+                                                visible : "{= ${ViewModel>tags}.length>0}",
                                                 items : [
                                                     new sap.ui.core.Icon({src : "sap-icon://tags"}),
                                                     new sap.m.HBox({
@@ -70,8 +94,7 @@ sap.ui.define([], function () {
                                                         }
                                                     }).addStyleClass("maincontent__tags"),
                                                 ]
-                                            })
-                                            
+                                            }).addStyleClass("sapUiTinyMarginTop")                                            
                                         ]
                                     }),
                                 ]

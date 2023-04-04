@@ -19,13 +19,14 @@ sap.ui.define(
 
                 //this.getPosts();
             },
-            onNavigation : function(sViewName){
+            onNavigation : function(sViewName,viewData){
                 const oView = this.getView();
                 const oPage = sap.ui.getCore().byId("mainPage");
                 
                 const oTargetView = sap.ui.view({
                     viewName : `sap.blog.view.${sViewName}`,
                     type : "JS",
+                    viewData
                 });
                 oPage.removeAllContent();
                 oPage.addContent(oTargetView);
