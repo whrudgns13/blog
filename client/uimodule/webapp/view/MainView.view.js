@@ -35,7 +35,7 @@ sap.ui.define([], function () {
                 customHeader : oCustomHeader,                
             }).addStyleClass("blog__page");
 
-            oController.onNavigation("MainContent");
+            oController.onHashChange("MainContent");
 
             return new sap.m.App(this.createId("idAppControl"), {
                 pages: oPage

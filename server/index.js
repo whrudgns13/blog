@@ -69,7 +69,7 @@ app.get("/posts/id/:id",(req,res)=>{
 
 app.post("/comment",(req,res)=>{
     let body = req.body;
-    let [comments,id] = getComments();
+    let [comments,id] = getComments();a
     body.id = ++id;
     console.log(comments,body);
     comments.push(body);

@@ -83,7 +83,7 @@ sap.ui.jsview("sap.blog.view.NewPost", {
                 new sap.m.Button({
                     text : "Close",
                     press : function(){
-                        oController.onNavigation("MainContent");
+                        oController.onHashChange("MainContent");
                     }
                 })
             ]

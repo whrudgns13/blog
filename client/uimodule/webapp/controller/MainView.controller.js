@@ -16,21 +16,36 @@ sap.ui.define(
                 
                 oView.setModel(oModel,"ViewModel");
                 this.oViewModel = oView.getModel("ViewModel");
+                
+                if(window.location.hash) this.onNavigation(window.location.hash.substr(1));
 
-                //this.getPosts();
+                window.addEventListener("hashchange",()=>{
+                    const [sHash,sSearch] = window.location.hash.split("?");
+                    this.onNavigation(sHash.substr(1),sSearch);
+                });
+                
             },
-            onNavigation : function(sViewName,viewData){
-                const oView = this.getView();
-                const oPage = sap.ui.getCore().byId("mainPage");
+            onNavigation : function(sViewName,sSearch){
+                let viewData
+                if(!sViewName) return;
+                if(sSearch){
+                    const [sKey, sValue] = sSearch.split("=");                
+                    viewData = {[sKey] : sValue};                
+                }
                 
                 const oTargetView = sap.ui.view({
                     viewName : `sap.blog.view.${sViewName}`,
                     type : "JS",
                     viewData
                 });
+                
+                const oPage = sap.ui.getCore().byId("mainPage");
                 oPage.removeAllContent();
                 oPage.addContent(oTargetView);
             },
+            onHashChange : function(sHash,sSearch){
+                window.location.hash = sHash+(sSearch ? "?"+sSearch : "");
+            }
         });
     }
 );

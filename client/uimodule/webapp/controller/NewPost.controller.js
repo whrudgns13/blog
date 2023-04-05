@@ -44,7 +44,7 @@ sap.ui.define(
                     }
                 });
 
-                if(response.status===200) this.onNavigation("MainContent");
+                if(response.status===200) this.onHashChange("MainContent");
             },
             validationCheck : function(){
                 const oSendData = this.oViewModel.getProperty("/sendData");

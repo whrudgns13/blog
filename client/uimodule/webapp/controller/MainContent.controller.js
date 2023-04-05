@@ -34,7 +34,7 @@ sap.ui.define(
                     return post;
                 });
 
-                this.oViewModel.setProperty("/posts",aPost);         
+                this.oViewModel.setProperty("/posts",aPost);
             },
             onPostSearch : function(oEvent){
                 const sQuery = oEvent.getParameter("query");
@@ -46,8 +46,9 @@ sap.ui.define(
             testfn : async function(oEvent){
                 const sBindingPath = oEvent.getSource().getBindingContext("ViewModel").getPath();
                 const iId = this.oViewModel.getProperty(sBindingPath+"/id");
-                const oPost = await (await fetch(`http://localhost:3000/posts/id/${iId}`)).json();
-                this.onNavigation("Blog",oPost);
+                this.onHashChange("Blog",`id=${iId}`);
+                // const oPost = await (await fetch(`http://localhost:3000/posts/id/${iId}`)).json();
+                
             }
         });
     }

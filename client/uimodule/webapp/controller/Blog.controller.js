@@ -7,18 +7,23 @@ sap.ui.define(
         "use strict";
 
         return Controller.extend("sap.blog.controller.Blog", {
-            onInit : function(){
+            onInit : function(){                
+                this._setDefault();
+            },
+            _setDefault : async function(){
                 const oView = this.getView();
+                const oViewData = oView.getViewData()
+                const oPost = await (await fetch(`http://localhost:3000/posts/id/${oViewData.id}`)).json();
                 const oModel = new sap.ui.model.json.JSONModel({
-                    ...oView.getViewData(),
+                    ...oPost,
                     sendData : {
-                        postId : oView.getViewData().id,
+                        postId : oPost.id,
                         visible : false,
                         value : "",
                         sender : ""
-                    },
-                    comments : []                    
-                });
+                    }                 
+                });                
+
                 oView.setModel(oModel,"ViewModel");
                 this.oViewModel = oView.getModel("ViewModel");
             },
@@ -56,7 +61,7 @@ sap.ui.define(
                     }
                 });
 
-                if(response.status===200) this.onNavigation("MainContent");
+                if(response.status===200) this.onHashChange("MainContent");
             },
         });
     }

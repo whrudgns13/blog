@@ -44,7 +44,7 @@ sap.ui.define([], function () {
                                     new sap.m.Link({
                                         text : "Write a Blog Post",
                                         press : function(){
-                                            oController.onNavigation("NewPost");
+                                            oController.onHashChange("NewPost");
                                         }
                                     }),
                                 ]
