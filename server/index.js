@@ -69,12 +69,12 @@ app.get("/posts/id/:id",(req,res)=>{
 
 app.post("/comment",(req,res)=>{
     let body = req.body;
-    let [comments,id] = getComments();a
+    let [comments,id] = getComments();
     body.id = ++id;
     console.log(comments,body);
     comments.push(body);
     saveCommnets(comments,id);
-    res.send("ok");
+    res.send(body);
 });
 
 

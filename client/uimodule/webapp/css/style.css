@@ -70,3 +70,17 @@
     border-top: 1px solid black;
     padding-top:2rem;
 }
+
+.comment__list{
+    background: transparent;
+}
+
+.comment__item{
+    background-color: white;
+    padding: 10px 10px 20px 20px;
+}
+
+.comment__item>div:first-child>div:first-child{
+    display: flex;
+    align-items: center;
+}

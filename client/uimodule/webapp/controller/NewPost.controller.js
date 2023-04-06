@@ -28,12 +28,12 @@ sap.ui.define(
                 if(!this.validationCheck()) return;
 
                 const oView = this.getView();
-                const dDate = new Date();                
+                
                 const aToken = oView.byId("tags").getTokens().map((token)=>{
                     return {value : token.getKey()}
                 });
                 
-                this.oViewModel.setProperty("/sendData/date",`${dDate.getFullYear()}년 ${dDate.getMonth()+1}월 ${dDate.getDate()}일`)
+                this.oViewModel.setProperty("/sendData/date",this.getCurrentDate());
                 this.oViewModel.setProperty("/sendData/tags",aToken);
 
                 const response = await fetch("http://localhost:3000/posts",{

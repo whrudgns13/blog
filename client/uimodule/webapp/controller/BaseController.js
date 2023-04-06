@@ -66,6 +66,10 @@ sap.ui.define(
                     this.getRouter().navTo("appHome", {}, true /* no history*/);
                 }
             },
+            getCurrentDate : function(){
+                const dDate = new Date();                
+                return `${dDate.getFullYear()}년 ${dDate.getMonth()+1}월 ${dDate.getDate()}일`
+            }
         });
     }
 );

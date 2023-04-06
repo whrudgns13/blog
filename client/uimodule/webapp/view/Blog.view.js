@@ -68,6 +68,35 @@ sap.ui.define([
                             })      
                         ]
                     }).addStyleClass("sapUiLargeMarginBottom"),
+                    new sap.m.CustomListItem({
+                        content : {
+                            path : "ViewModel>/comments",
+                            template : new sap.m.VBox({
+                                items : [
+                                    new sap.m.HBox({
+                                        items : [
+                                            new sap.m.Avatar({
+                                                displaySize : "XS"
+                                            }).addStyleClass("sapUiTinyMarginEnd"),
+                                            new sap.m.VBox({
+                                                items : [
+                                                    new sap.m.Text({
+                                                        text : "{ViewModel>sender}"
+                                                    }),
+                                                    new sap.m.Text({
+                                                        text : "{ViewModel>date}",
+                                                    })
+                                                ]
+                                            })
+                                        ]
+                                    }).addStyleClass("sapUiSmallMarginBottom"),
+                                    new sap.m.Text({
+                                        text : "{ViewModel>value}"
+                                    })
+                                ]
+                            }).addStyleClass("sapUiLargeMarginBottom comment__item")
+                        }
+                    }).addStyleClass("comment__list blog__comment"),
                     (function(){
                         
                         const oRTE = new sap.ui.richtexteditor.RichTextEditor({
@@ -117,7 +146,7 @@ sap.ui.define([
                                 oRTE,
                                 oButtomGroup  
                             ]
-                        }).addStyleClass("blog__comment");
+                        });
 
                         return oVBox;
                     }()) 
